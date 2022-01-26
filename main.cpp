@@ -6,26 +6,6 @@
 
 using namespace std;
 
-void Symbol(int L, int arr[][2], int x, int y)
-{
-    for(int i = 1; i < L; i++)
-    {
-        if(arr[i][0] == x && arr[i][1] == y)
-        {
-            cout << '@';
-            break;
-        }
-        if(arr[0][0] == x && arr[0][1] == y)
-        {
-            cout << "*";
-            break;
-        }
-        if(i == L - 1)
-        {
-            cout << " ";
-        }
-    }
-}
 void Draw(int arr[][2], int L, int width = 0, int height = 0)
 {
     for(int y2 = 0; y2 <= height; y2++)
@@ -43,7 +23,23 @@ void Draw(int arr[][2], int L, int width = 0, int height = 0)
             cout << "#";
             for(int x2 = 1; x2 <= width; x2++)
             {
-                Symbol(L, arr, x2, y2);
+                for(int i = 1; i < L; i++)
+                {
+                    if(arr[i][0] == x2 && arr[i][1] == y2)
+                    {
+                        cout << '@';
+                        break;
+                    }
+                    if(arr[0][0] == x2 && arr[0][1] == y2)
+                    {
+                        cout << "*";
+                        break;
+                    }
+                    if(i == L - 1)
+                    {
+                    cout << " ";
+                    }
+                }
             }
             cout << '#' << endl;
         }
@@ -53,7 +49,6 @@ void Draw(int arr[][2], int L, int width = 0, int height = 0)
 int main()
 {
     srand(time(0));
-    GAME:
     int NewELement[2];
     char v = ' ', v2 = v;
     int TailL = 5;
@@ -82,7 +77,7 @@ int main()
             }
         }
 
-        cout << "Score = " << TailL - 5 << endl;
+        cout << "Score: " << TailL - 5 << endl;
         Draw(tail, TailL, MaxX, MaxY);
         if(tail[0][0] == 0 || tail[0][1] == 0)
         {
@@ -145,10 +140,10 @@ int main()
     if(GameOver)
     {
         system("clear");
-        cout << "Score = " << TailL - 5 << endl;
+        cout << "Score: " << TailL - 5 << endl;
         cout << "#####     #     ##   ## #####\n" << "#        # #    # # # # #\n" << "#  ##   #   #   #  #  # #####\n" << "#   #  #######  #     # #\n" << "##### #       # #     # #####\n" << endl << "##### #       # ###### #####\n" << "#   #  #     #  #      #   #\n" << "#   #   #   #   ###### #####\n" << "#   #    # #    #      #  #\n" << "#####     #     ###### #   #\n" << endl << "q - quit | other - restart\n";
         char s = getch();
         if(s == 'q') { cout << "Good luck!" << endl; }
-        else         { goto GAME;                    }
+        else         { main();                       }
     }
 }
